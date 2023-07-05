@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}      
+        <style>
+        .titulo{
+          background-color: darkblue;
+          border-radius: 20px;
+          padding: 10px;
+          font-family: arial;
+        }
+        h1{
+            color: white;
+            font-size: xxx-large;
+        }
+        </style>
+    </head>
+    <body>
+        <!-- encabezado-->
+     
+        <!-- contenido-->
+      
+        <div align="center">
+            <div style="width: 70%;">
+
+              <!-- Formulario -->
+              <br>
+              <br>
+              <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.titulo.id_for_label }}">Título</label>
+                    {{ form.titulo|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.edicion.id_for_label }}">Edición</label>
+                    {{ form.edicion|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.editorial.id_for_label }}">Editorial</label>
+                    {{ form.editorial|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.año_de_publicacion.id_for_label }}">Año de publicación</label>
+                    {{ form.año_de_publicacion|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.pagina.id_for_label }}">Páginas</label>
+                    {{ form.pagina|add_class:"form-control" }}
+                </div>
+                <button class="btn btn-primary"  type="submit">Guardar</button>
+              </form>
+   
+            </div>
+        </div>
+
+
+      
+       
+
+       <!--
+        Ahora que tenemos un form group (arriba) nos permite crear labels para cada uno de los campos de formulario,
+
+        El siguiente era un formulario sin formato, form.as_p nos pintaba el formulario de un jalón sin personalización, ni estilo,
+        ni nada, la etiqueta del for nos permitía recorrer los resultados de libros... 
+
+        <div>
+            {% for libro in libros %}
+            <p>{{ libro.titulo }} </p>
+            {% endfor %}
+        </div>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+        -->
+
+    </body>
+</html>
+{% endblock %}

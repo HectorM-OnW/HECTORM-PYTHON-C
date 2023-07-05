@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% load bootstrap4 %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
@@ -19,11 +21,9 @@
     </head>
     <body>
         <!-- encabezado-->
-        <div class="titulo" align="center">
-            <h1>Libros</h1>
-        </div>
+
         <!-- contenido-->
-       {% block content %}
+       
         <div align="center">
             <div style="width: 70%;">
               <table class="table">
@@ -75,43 +75,20 @@
                 </tbody>
 
               </table>  
-              <!-- Formulario -->
-              <br>
-              <br>
-              <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="{{ form.titulo.id_for_label }}">Título</label>
-                    {{ form.titulo|add_class:"form-control" }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.edicion.id_for_label }}">Edición</label>
-                    {{ form.edicion|add_class:"form-control" }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.editorial.id_for_label }}">Editorial</label>
-                    {{ form.editorial|add_class:"form-control" }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.año_de_publicacion.id_for_label }}">Año de publicación</label>
-                    {{ form.año_de_publicacion|add_class:"form-control" }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ form.pagina.id_for_label }}">Páginas</label>
-                    {{ form.pagina|add_class:"form-control" }}
-                </div>
-                <button class="btn btn-primary"  type="submit">Guardar</button>
-              </form>
+
    
             </div>
         </div>
 
 
-       {% endblock %}
        
+       <!--
+        Ahora que tenemos un form group (arriba) nos permite crear labels para cada uno de los campos de formulario,
 
-       
-        <!--<div>
+        El siguiente era un formulario sin formato, form.as_p nos pintaba el formulario de un jalón sin personalización, ni estilo,
+        ni nada, la etiqueta del for nos permitía recorrer los resultados de libros... 
+
+        <div>
             {% for libro in libros %}
             <p>{{ libro.titulo }} </p>
             {% endfor %}
@@ -123,7 +100,10 @@
                 {{ form.as_p }}
                 <button type="submit">Guardar</button>
             </form>
-        </div>-->
+        </div>
+        -->
 
     </body>
 </html>
+{% endblock %}
+
