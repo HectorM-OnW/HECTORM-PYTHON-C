@@ -59,30 +59,6 @@
         </div>
 
 
-      
-       
-
-       <!--
-        Ahora que tenemos un form group (arriba) nos permite crear labels para cada uno de los campos de formulario,
-
-        El siguiente era un formulario sin formato, form.as_p nos pintaba el formulario de un jalón sin personalización, ni estilo,
-        ni nada, la etiqueta del for nos permitía recorrer los resultados de libros... 
-
-        <div>
-            {% for libro in libros %}
-            <p>{{ libro.titulo }} </p>
-            {% endfor %}
-        </div>
-
-        <div>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Guardar</button>
-            </form>
-        </div>
-        -->
-
     </body>
 </html>
 {% endblock %}
