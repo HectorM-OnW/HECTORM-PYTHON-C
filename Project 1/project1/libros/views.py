@@ -1,6 +1,6 @@
 from django.http import HttpResponse 
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import json
 
 from .models import Libros
@@ -40,7 +40,9 @@ class Formulario(View):
     
 class EliminarLibro(View):
     def post(self, request, libro_id):
-        return
+        libro = get_object_or_404(Libros, pk=libro_id)
+        libro.delete()
+        return redirect('inicio')
 
 '''
 La siguiente función con Post hacia la base de datos ya no se necesita, porque ya tenemos formulario...
