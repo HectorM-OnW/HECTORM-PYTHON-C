@@ -15,7 +15,7 @@ class Inicio(View):
 
     def post(self, request):
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name)
     
     def get(self, request):
         libros = Libros.objects.all()
