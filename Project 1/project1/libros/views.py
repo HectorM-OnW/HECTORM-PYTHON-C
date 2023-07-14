@@ -37,6 +37,10 @@ class Formulario(View):
     def get(self, request):
         form = LibroForm()
         return render(request, self.template_name, {'form': form})
+    
+class EliminarLibro(View):
+    def post(self, request, libro_id):
+        return
 
 '''
 La siguiente función con Post hacia la base de datos ya no se necesita, porque ya tenemos formulario...
