@@ -5,7 +5,10 @@
 <!DOCTYPE html>
     <head>
         {% bootstrap_css %}
-        {% bootstrap_javascript %}      
+        {% bootstrap_javascript %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+        
+        
         <style>
         .titulo{
           background-color: darkblue;
@@ -74,13 +77,13 @@
                             {{ libro.pagina }}
                         </td>
                         <td>
-                            <form method="post" id="form-eliminar" class="'form-eliminar" action="{% url 'eliminar_libro' libro.pk %}">
+                            <form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_libro' libro.pk %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="libro_id" value="{{ libro.pk }}">
-                                <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
-                                <div class="dropdown" id="dropdown-confirmacion" style="display: none;">
+                                <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar-{{ libro.pk }}">Eliminar</button>
+                                <div class="dropdown" id="dropdown-confirmacion-{{ libro.pk }}" style="display: none;">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Confirmar eliminación 
+                                        Confirmar eliminación
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <button class="dropdown-item" type="submit">Sí, eliminar</button>
@@ -101,19 +104,23 @@
         <script>
             $(document).ready(function(){
                 //Mostrar el menú desplegable
-                $('#btn-confirmar-eliminar').click(function(){
-                    $('#dropdown-confirmacion').show();
+                $('[id^="btn-confirmar-eliminar"]').click(function(){
+                    var divId = $(this).attr('id').split('-')[3];
+                    $('#dropdown-confirmacion-' + divId).show();
                 });
-                //Cancelar eliminación
-                $('#btn-cancelar-eliminar').click(function(){
-                    $('#dropdown-confirmacion').hide();
+                //Cancelar la eliminación
+                $('[id^="btn-cancelar-eliminar"]').click(function(){
+                    var divId2 = $(this).attr('id').split('-')[3];
+                    $('#dropdown-confirmacion-' + divId2).hide();
                 });
             });
         </script>
 
 
+
+
        
-       <!--
+       <!-- PAST CODE
         1.Ahora que tenemos un form group arriba, esto nos permite crear labels para cada uno de los campos del formulario,
 
         2.El siguiente código creaba un formulario sin formato, form.as_p nos pintaba el formulario de un jalón sin personalización, ni estilo,
@@ -141,3 +148,23 @@
 </html>
 {% endblock %}
 
+
+
+
+
+
+<!--COMPLETE CODE
+<form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_libro' libro.pk %}">
+    {% csrf_token %}
+    <input type="hidden" name="libro_id" value="{{ libro.pk }}">
+    <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+    <div class="dropdown" id="dropdown-confirmacion" style="display: none;">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Confirmar eliminación 
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" type="submit">Sí, eliminar</button>
+            <button class="dropdown-item" type="button" id="btn-cancelar-eliminar">Cancelar</button>
+        </div>
+    </div>
+-->
