@@ -19,13 +19,22 @@
                 <!-- Contenido del menú colapsable -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <!-- Lista de elementos del menú -->
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'formulario' %}">Formulario</a>
                         </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-link">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-link">
+                            <a class="nav-link" href="{% url 'login' %}">Login </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
 
