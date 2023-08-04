@@ -3,12 +3,17 @@ from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 import json
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Sum, Max, Avg
+
 from .models import Libros
 from .forms import LibroForm
 
 def index(request):
 
     return HttpResponse("Hola Mundo")
+
 
 class Inicio(View):
     template_name = 'inicio.html'
@@ -17,6 +22,7 @@ class Inicio(View):
 
         return render(request, self.template_name)
     
+    @method_decorator(login_required)
     def get(self, request):
         libros = Libros.objects.all()
         
@@ -44,15 +50,23 @@ class EliminarLibro(View):
         libro.delete()
         return redirect('inicio')
 
+def estadisticas_libros(request):
+    # Obtener el número total de páginas de todos los libros
+    total_paginas = Libros.objects.aggregate(total_paginas=Sum('pagina'))['total_paginas']
 
+    # Obtener el año máximo de publicación
+    max_anio_publicacion = Libros.objects.aggregate(max_anio_publicacion=Max('año_de_publicacion'))['max_anio_publicacion']
 
-'''COMPLETE CODE
-class EliminarLibro(View):
-    def post(self, request, libro_id):
-        libro = get_object_or_404(Libros, pk=libro_id)
-        libro.delete()
-        return redirect('inicio')
-'''
+    # Obtener el número promedio de páginas de todos los libros
+    promedio_paginas = Libros.objects.aggregate(promedio_paginas=Avg('pagina'))['promedio_paginas']
+
+    return render(request, 'estadisticas/estadisticas_libros.html',{
+        'total_paginas': total_paginas,
+        'max_anio_publicacion': max_anio_publicacion,
+        'promedio_paginas': promedio_paginas
+    })
+    
+
 
     
 '''
