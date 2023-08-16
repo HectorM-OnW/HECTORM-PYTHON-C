@@ -9,3 +9,4 @@ urlpatterns = [
     path('eliminar-libro/<int:libro_id>/', views.EliminarLibro.as_view(), name='eliminar_libro'),
     path('estadisticas/', views.estadisticas_libros, name='estadisticas_libros')
 ]
+
