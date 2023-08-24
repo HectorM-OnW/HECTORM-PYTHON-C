@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<!-- In the next examples we are going to do the same function which consists of a buttona that changes the color of the text between red and blue
+    but using different languages, just to aprecciate the differences between the codes -->
+
+<!-- #1.Using JavaScript
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <title>Ejemplo JS</title>
+        
+    </head>
+    <body>
+        <p id="parrafo">Hola Mundo!</p>
+        <button onclick="changeColor('blue')">Azul</button>
+        <button onclick="changeColor('red')">Rojo</button>
+
+        <script>
+            function changeColor(newColor){
+                var elem = document.getElementById('');
+                elem.style.color = newColor;
+
+            }
+        </script>
+    </body>
+</html>-->
+
+
+
+
+<!-- #2.Using JQuery 
+
+<html>
+    <head>
+
+        <title>Ejemplo JQ</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <p id="parrafo">Hola Mundo!</p>
+        <button onclick="changeColor('blue')">Azul</button>
+        <button onclick="changeColor('red')">Rojo</button>
+
+        <script>
+            function changeColor(newColor){
+                $('#parrafo').css('color',newColor);
+
+            }
+        </script>
+    </body>
+</html>-->
+
+
+
+
+
+ <!-- #3.Using Modal with JS-->
+
+<!--
+<html>
+    <head>
+
+        <title>Ejemplo JS & Modal</title>
+        <style>
+            .modal{
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            }
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 20px;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+-->
+
+        <!-- Botón -->
+<!--
+        <button id="abrirModal" onclick="openModal">Abrir Modal</button>
+-->
+
+        <!-- Modal -->
+<!--
+        <div class="modal" id="modal">
+            <div class="modal-content">
+-->
+
+                <!-- Contenido del modal -->
+<!--
+                <p>Hola Mundo!</p>
+            </div>
+        </div>
+         
+
+        <script>
+            function openModal(){
+                var modal = document.getElementById('modal');
+                modal.style.display = 'block';
+            }
+           
+        </script>
+    </body>
+</html>
+-->
+
+<!-- #4.JQ & Modal -->
+
+<html>
+    <head>
+
+        <title>Ejemplo JQ & Modal</title>
+        <style>
+            .modal{
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            }
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 20px;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <!-- Botón -->
+        <button id="abrirModal">Abrir Modal</button>
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <!-- Contenido del modal -->
+                <p>Hola Mundo!</p>
+            </div>
+        </div>
+
+        <script>
+           $(document).ready(function(){
+            $('#abrirModal').click(function(){
+                $('#modal').show();
+            })
+           });
+           
+        </script>
+    </body>
+</html>

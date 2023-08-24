@@ -18,6 +18,13 @@ class Libros(models.Model):
     
     
     '''
+    _str_  >>> Es un metodo especial en Django que se utiliza para representar una instancia de nuestro modelo 
+    como una cadena de texto legible, y no como un código alfanumérico que no nos ayude a identificar que tipo
+    de modelo o dato se trata.
+
+    '''
+
+    '''
     En caso de intentar retornar algun dato alfanumérico hay que conovertirlo a string, por ejemplo...
     '''
        # return str(self.año_de_publicacion)

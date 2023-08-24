@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
+        <style>
+            .titulo{
+              background-color: rgb(11, 35, 30);
+              padding: 30px;
+              font-family: arial;
+            }
+            h1{
+            color: white;
+            font-size: xxx-large;
+        }
+        </style>
+    </head>
+    <body>
+        <!-- Encabezado -->
+        <div align="center" class="titulo">
+            <h1>Consultar un reporte</h1>
+        </div>
+        
+        <!-- Contenido--> 
+        <div align="center">
+            <div style="width: 70%;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                #
+                            </th>
+                            <th scope="col">
+                                Titulo
+                            </th>
+                            <th scope="col">
+                                Problema/Solicitud
+                            </th>
+                            <th scope="col">
+                                Categoria
+                            </th>
+                            <th scope="col">
+                                Estado 
+                            </th>
+                            <th scope="col">
+                                Ciudad
+                            </th>
+                            <th scope="col">
+                                CP
+                            </th>
+                            <th scope="col">
+                                Pendiente
+                            </th>
+                            <th scope="col">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {% for reporte in reportes %}
+                        <tr>
+                            <td scope="row">
+                                {{ reporte.pk }}
+                            </td>
+                            <td>
+                                {{ reporte.titulo }}
+                            </td>
+                            <td>
+                                {{ reporte.accion }}
+                            </td>
+                            <td>
+                                {{ reporte.categoria }}
+                            </td>
+                            <td>
+                                {{ reporte.estado }}
+                            </td>
+                            <td>
+                                {{ reporte.ciudad }}
+                            </td>
+                            <td>
+                                {{ reporte.cp }}
+                            </td>
+                            <td>
+                                {{ reporte.cp }}
+                            </td>
+                            <td>  
+                                <!-- Form para la funcionalidad de eliminar un reporte -->
+                                <form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_reporte' reporte.pk %}">
+                                    {% csrf_token %}
+                                    <!-- Botón de "Eliminar" -->
+                                    <input type="hidden" name="reporte_id" value="{{ reporte.pk }}">
+                                    <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar-{{ reporte.pk }}">Eliminar</button>
+                                    <!-- Botón de "Confirmar eliminación" -->
+                                    <div class="dropdown" id="dropdown-confirmacion-{{ reporte.pk }}" style="display: none;">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Confirmar eliminación
+                                        </button>
+                                        <!-- Botones de "Si, eliminar" & "Cancelar"-->
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <button class="dropdown-item" type="submit">Sí, eliminar</button>
+                                            <button class="dropdown-item" type="button" id="btn-cancelar-eliminar">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                //Mostrar el menú desplegable
+                $('[id^="btn-confirmar-eliminar"]').click(function(){
+                    var divId = $(this).attr('id').split('-')[3];
+                    $('#dropdown-confirmacion' + divId).show();
+                });
+                //Cancelar la eliminación
+                $('[id^="btn-cancelar-eliminar"]').click(function(){
+                    var divId2 = $(this).attr('id').split('-')[3];
+                    $('#dropdown-confirmacion-' + divId2).hide();
+                });
+
+            });
+        </script>
+
+    </body>
+</html>
+{% endblock %}

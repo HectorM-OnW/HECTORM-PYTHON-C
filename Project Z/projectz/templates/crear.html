@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        
+        <style>
+            .titulo{
+              background-color: rgb(11, 35, 30);
+              padding: 30px;
+              font-family: arial;
+            }
+            h1{
+            color: white;
+            font-size: xxx-large;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Encabezado -->
+        <div align="center" class="titulo">
+            <h1>Crear un reporte</h1>
+        </div>
+        <!-- Contenido -->
+        
+        <div align="center">
+            <div style="width: 70%;">
+
+                <!-- Formulario -->
+              <br>
+              <br>
+              <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.titulo.id_for_label }}">Título</label>
+                    {{ form.titulo|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.accion.id_for_label }}">Reportar problema/Solicitud de información</label>
+                    {{ form.accion|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.categoria.id_for_label }}">Categoría</label>
+                    {{ form.categoria|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.estado.id_for_label }}">Estado</label>
+                    {{ form.estado|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.ciudad.id_for_label }}">Ciudad</label>
+                    {{ form.ciudad|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cp.id_for_label }}">Código Postal</label>
+                    {{ form.cp|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.edad.id_for_label }}">Edad</label>
+                    {{ form.edad|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.descripcion.id_for_label }}">Descripción</label>
+                    {{ form.descripcion|add_class:"form-control" }}
+                </div>
+               
+                <button class="btn btn-primary"  type="submit">Guardar</button>
+              </form>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+{% endblock %}

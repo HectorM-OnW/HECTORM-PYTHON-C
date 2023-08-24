@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        
+        <style>
+            .titulo{
+              background-color: rgb(11, 35, 30);
+              padding: 30px;
+              font-family: arial;
+            }
+            h1{
+            color: white;
+            font-size: xxx-large;
+            }
+        </style>
+    </head>
+    
+        <!-- Encabezado-->
+        <div align="center" class="titulo">
+            <h1>Estadísticas</h1>
+        </div>
+
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </head>
+        <body>
+            <!-- Contenedor principal con margen superior -->
+            <div class="container mt-4">
+                <!-- Fila -->
+                <div class="row">
+                    <!-- Columna centrada en dispositivos medianos (ancho pantalla <= 768)-->
+                    <div class="col-md-8 offset-md-2">
+
+                        <!-- Div centrado con margenes inferiores-->
+                        <div class="text-center mb-3">
+
+                            <p>Edad total de todos los ciudadanos: {{ total_edad }}</p>
+
+                            <p>Máxima edad de los ciudadanos: {{ max_edad }}</p>
+
+                            <p>Edad promedio: {{ promedio_edad }}</p>
+                            <!-- Contenedor para el gráfico -->
+                            <div style="height:400px;">
+                                <!-- Canvas donde se mostrará el gráfico -->
+                                <canvas id="miGrafico"></canvas>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- JavaScript para crear y configurar el gráfico -->
+            <script>
+                //Datos para el gráfico
+                var datos = {
+                    labels: ["Edad total", "Edad máxima", "Edad promedio"],
+                    datasets: [{
+                        label: "Estadísticas de reportes",
+                        backgroundColor: ["red", "blue", "green"],
+                        data: [{{ total_edad }}, {{ max_edad }}, {{ promedio_edad }}]
+                    }]
+                };
+                //Configuración del gráfico
+                var opciones = {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+                // Crear el Gráfico
+                var ctx = document.getElementById("miGrafico").getContext("2d")
+                var miGrafico = new Chart(ctx, {
+                    type: 'bar',
+                    data: datos,
+                    options: opciones
+                });
+            </script>
+
+
+        </body>
+    </html>
+{% endblock %}

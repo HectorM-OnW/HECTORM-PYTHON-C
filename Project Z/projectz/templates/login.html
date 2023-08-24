@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        
+        <style>
+            .titulo{
+            background-color: rgb(11, 35, 30);
+            padding: 30px;
+            font-family: arial;
+            }
+            h1{
+            color: white;
+            font-size: xxx-large;
+        }
+        </style>
+    </head>
+
+    <body>
+        <!-- Encabezado -->
+        <div align="center" class="titulo">
+            <h1>Accede a tu cuenta</h1>
+        </div>
+
+        <br>
+        <!-- Login -->
+        <div align="center">
+            {% if messages %}
+            <!--Bloque de mensajes-->
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tag %} class="{{ message.tags }}" {% endif %}> {{ message }} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <!--Formulario de Login-->
+            <form method="post">
+                {% csrf_token %}
+                <label for="username"> Correo: </label>
+                <br>
+                <input type="text" name="username" id="username" required>
+                <br>
+                <label for="password"> Contraseña: </label>
+                <br>
+                <input type="password" name="password" id="password">
+                <br>
+                <br>
+                <input type="submit" value="Iniciar sesión" class="btn btn-primary">
+            </form>
+            <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+        </div>
+    </body>
+{% endblock %}
