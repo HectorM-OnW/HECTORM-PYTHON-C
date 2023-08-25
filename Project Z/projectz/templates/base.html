@@ -1,5 +1,6 @@
 {% load bootstrap4 %}
 {% load widget_tweaks %}
+{% load static %}
 <html>
     <head>
         {% bootstrap_css %}  
@@ -11,7 +12,7 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">               
 
                 <a class="navbar-brand" href="#">
-                    <!-- <img src="images/Logo 0 ICON 0.ico"> -->
+                    <img src="{% static 'images/Logo 0 ICON OG.ico' %}" height="45px" width="35px" alt="X">
                     GobResponde
                 </a>
 
@@ -78,7 +79,9 @@
     <br>
     <footer align="center" class="footer">
         
-        <h3>Gobierno de México</h3>
+        <h3>Gobierno de México</h3>        
 
     </footer>
+    
 </html>
+

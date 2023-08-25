@@ -43,16 +43,20 @@
                         <!-- Div centrado con margenes inferiores-->
                         <div class="text-center mb-3">
 
-                            <p>Reportes Totales Recibidos: {{ total_reportes }}</p>
+                            <p>Reportes/Solicitudes de Seguridad: {{ reportes_seguridad }}</p>
 
-                            <p>Reportes de Problemas: {{ reportes_problemas }}</p>
+                            <p>Reportes/Solicitudes de Alumbrado: {{ reportes_alumbrado }}</p>
 
-                            <p>Solicitudes de Información: {{ solicitudes_informacion }}</p>
+                            <p>Reportes/Solicitudes Viales: {{ reportes_viales }}</p>
+
+                            <p>Reportes/Solicitudes Civiles: {{ reportes_civiles }}</p>
+
+                            
 
                             <!-- Contenedor para el gráfico -->
                             <div style="height:400px;">
                                 <!-- Canvas donde se mostrará el gráfico -->
-                                <canvas id="miGrafico"></canvas>
+                                <canvas id="miGrafico2"></canvas>
 
                             </div>
 
@@ -63,31 +67,31 @@
             <!-- JavaScript para crear y configurar el gráfico -->
             <script>
                 //Datos para el gráfico
-                var datos = {
-                    labels: ["Total Reportes", "Reportes de problemas", "Solicitudes de Información"],
+                var datos2 = {
+                    labels: ["Seguridad", "Alumbrado", "Viales", "Civiles"],
                     datasets: [{
                         label: "Estadísticas",
-                        backgroundColor: ["red", "blue", "green"],
-                        data: [{{ total_reportes }}, {{ reportes_problemas }}, {{ solicitudes_informacion }}]
+                        backgroundColor: ["red", "blue", "green","purple"],
+                        data: [{{ reportes_seguridad }}, {{ reportes_alumbrado }}, {{ reportes_viales }}, {{ reportes_civiles }}]
                     }]
                 };
                 //Configuración del gráfico
-                var opciones = {
+                var opciones2 = {
                     responsive: true,
                     maintainAspectRatio: false
                 }
                 // Crear el Gráfico
-                var ctx = document.getElementById("miGrafico").getContext("2d")
-                var miGrafico = new Chart(ctx, {
-                    type: 'bar',
-                    data: datos,
-                    options: opciones
+                var ctx2 = document.getElementById("miGrafico2").getContext("2d")
+                var miGrafico2 = new Chart(ctx2, {
+                    type: 'pie',
+                    data: datos2,
+                    options: opciones2
                 });
 
             </script>
                  
         </body>
-        <a class="nav-link"  href="{% url 'estadisticas_reportes_2' %}">Siguiente>>></a>
+        <a class="nav-link"  href="{% url 'estadisticas_reportes' %}"> Anterior<<< </a>
     </html>
 {% endblock %}
 

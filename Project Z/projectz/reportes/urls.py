@@ -2,12 +2,16 @@
 from django.urls import path
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('consultar/', views.Consultar.as_view(), name='consultar'),
     path('crear/', views.Crear.as_view(), name='crear'),
     path('eliminar-reporte/<int:reporte_id>/', views.EliminarReporte.as_view(), name='eliminar_reporte'),
     path('estadisticas/', views.estadisticas_reportes, name='estadisticas_reportes'),
+    path('estadisticas-2/', views.estadisticas_reportes_2, name='estadisticas_reportes_2'),
     path('register/', views.register, name='register')
 ]
 
@@ -21,3 +25,6 @@ path('consultar', views.Consultar.as_view(), name='consultar') >>> Aquí tenemos
 
 
 '''
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

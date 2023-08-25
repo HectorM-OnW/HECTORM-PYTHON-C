@@ -5,13 +5,15 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.db.models import Sum, Max, Avg
+from django.db.models import Sum, Max, Avg, Count
 
 from .models import Reportes
 from .forms import ReportesForm
 
 from django.contrib.auth import login, authenticate
 from .forms import UserRegistrationForm
+
+
 
 # Create your views here.
 def index(request):
@@ -55,20 +57,76 @@ class EliminarReporte(View):
 
 @login_required 
 def estadisticas_reportes(request):
-    # Obtener el número total de edad de los ciudadanos
-    total_edad = Reportes.objects.aggregate(total_edad=Sum('edad'))['total_edad']
+    # Obtener el número total de reportes de los ciudadanos
+    total_reportes = Reportes.objects.aggregate(total_reportes=Count('id'))['total_reportes']
 
-    # Obtener la edad máxima de los ciudadanos
-    max_edad = Reportes.objects.aggregate(max_edad=Max('edad'))['max_edad']
+    # Obtener la cantidad de Reportes de Problema
+    reportes_problemas_x = Reportes.objects.filter(accion='Reporte de Problema')
+    reportes_problemas_y = 0
 
+    for a in reportes_problemas_x:
+        reportes_problemas_y = reportes_problemas_y + 1
+
+    reportes_problemas = reportes_problemas_y
+    
     # Obtener el número promedio de edad de los ciudadanos
-    promedio_edad = Reportes.objects.aggregate(promedio_edad=Avg('edad'))['promedio_edad']
+    solicitudes_informacion = total_reportes - reportes_problemas
+
 
     return render(request, 'estadisticas/estadisticas_reportes.html',{
-        'total_edad': total_edad,
-        'max_edad': max_edad,
-        'promedio_edad': promedio_edad
+        'total_reportes': total_reportes,
+        'reportes_problemas': reportes_problemas,
+        'solicitudes_informacion': solicitudes_informacion,
+        
     })
+
+@login_required 
+def estadisticas_reportes_2(request):
+    # Obtener la cantidad total de reportes/solicitudes de categoría: Seguridad
+    reportes_seguridad_x = Reportes.objects.filter(categoria='Seguridad')
+    reportes_seguridad_y = 0
+
+    for b in reportes_seguridad_x:
+        reportes_seguridad_y = reportes_seguridad_y + 1
+
+    reportes_seguridad = reportes_seguridad_y
+
+    # Obtener la cantidad total de reportes/solicitudes de categoría: Alumbrado
+    reportes_alumbrado_x = Reportes.objects.filter(categoria='Alumbrado')
+    reportes_alumbrado_y = 0
+
+    for c in reportes_alumbrado_x:
+        reportes_alumbrado_y = reportes_alumbrado_y + 1
+
+    reportes_alumbrado = reportes_alumbrado_y
+
+    # Obtener la cantidad total de reportes/solicitudes de categoría: Viales
+    reportes_viales_x = Reportes.objects.filter(categoria='Vial')
+    reportes_viales_y = 0
+
+    for d in reportes_viales_x:
+        reportes_viales_y = reportes_viales_y + 1
+
+    reportes_viales = reportes_viales_y
+    
+    # Obtener la cantidad total de reportes/solicitudes de categoría: Civiles
+    reportes_civiles_x = Reportes.objects.filter(categoria='Civil')
+    reportes_civiles_y = 0
+
+    for e in reportes_civiles_x:
+        reportes_civiles_y = reportes_civiles_y + 1
+
+    reportes_civiles = reportes_civiles_y
+
+
+    return render(request, 'estadisticas/estadisticas_reportes_2.html',{
+        'reportes_seguridad': reportes_seguridad,
+        'reportes_alumbrado': reportes_alumbrado,
+        'reportes_viales': reportes_viales,
+        'reportes_civiles': reportes_civiles
+        
+    })
+
 
 def register(request):
     # Verificar si la solicitud es del tipo POST (envío de datos del formulario)
@@ -94,3 +152,4 @@ def register(request):
         form = UserRegistrationForm()
     # Renderizar la plantilla de registro con el formulario (ya sea en blanco o con datos ingresados previamente)
     return render(request, 'registration/register.html', {'form': form})
+
