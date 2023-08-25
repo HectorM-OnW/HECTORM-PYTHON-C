@@ -47,10 +47,11 @@ class Crear(View):
         return render(request, self.template_name, {'form': form})
     
 class EliminarReporte(View):
-    def post(self, request, reporte_id):    
+    def post(self, request, reporte_id): 
         reporte = get_object_or_404(Reportes, pk=reporte_id)
         reporte.delete()
-        return redirect('consultar')          
+        return redirect('consultar')   
+              
 
 @login_required 
 def estadisticas_reportes(request):
