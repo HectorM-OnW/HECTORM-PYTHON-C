@@ -11,10 +11,9 @@
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">               
 
                 <a class="navbar-brand" href="#">
-                    <!-- <img src="images/Logo 0 ICON 0.ico"> -->
+                    <img src="images/Logo 0 ICON 0.ico">
                     GobResponde
                 </a>
-                
 
                 <!-- Botón de alternancia -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -40,6 +39,9 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Salir</a>

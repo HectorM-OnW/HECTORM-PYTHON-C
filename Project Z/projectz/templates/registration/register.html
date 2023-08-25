@@ -1,5 +1,30 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as.p }}
-    <button type="submit">Registrarse</button>
-</form>
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+    <head>
+
+        <style>
+            .titulo{
+              background-color: rgb(11, 35, 30);
+              padding: 30px;
+              font-family: arial;
+            }
+            h1{
+            color: white;
+            font-size: xxx-large;
+        }
+        </style>
+    </head>
+    <body>
+
+        <form method="post" align="center">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary" align="center">Registrarse</button>
+        </form>
+
+    </body>
+</html>
+{% endblock %}
