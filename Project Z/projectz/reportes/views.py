@@ -5,7 +5,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.db.models import Sum, Max, Avg, Count
+from django.db.models import Count
 
 from .models import Reportes
 from .forms import ReportesForm
@@ -17,7 +17,7 @@ from .forms import UserRegistrationForm
 
 # Create your views here.
 def index(request):
-
+    
     return HttpResponse("Gobierno responde a tus solicitudes!")
 
 class Consultar(View):
@@ -35,7 +35,8 @@ class Consultar(View):
     
 class Crear(View):
     template_name = 'crear.html'
-    def post(self, request, ):
+
+    def post(self, request):
         form = ReportesForm(request.POST)
         if form.is_valid():
             form.save()
@@ -153,3 +154,11 @@ def register(request):
     # Renderizar la plantilla de registro con el formulario (ya sea en blanco o con datos ingresados previamente)
     return render(request, 'registration/register.html', {'form': form})
 
+
+
+    
+        
+
+    
+    
+    

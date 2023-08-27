@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 from .models import Reportes
 
+
 # Classes
 class ReportesForm(forms.ModelForm):
     class Meta:
@@ -26,6 +27,7 @@ class ReportesForm(forms.ModelForm):
             raise forms.ValidationError('Por favor completa todos los campos')
         
         return cleaned_data
+    
     
 class UserRegistrationForm(UserCreationForm):
     # Agregar un campo adicional para el correo electrónico (EmailField)

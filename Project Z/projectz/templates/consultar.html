@@ -55,10 +55,10 @@
                                 CP
                             </th>
                             <th scope="col">
-                                Pendiente
+                                Acciones
                             </th>
                             <th scope="col">
-                                Acciones
+                                ¿Spam?
                             </th>
                         </tr>
                     </thead> 
@@ -87,7 +87,7 @@
                                 {{ reporte.cp }}
                             </td>
                             <td>
-                                Nada
+                                Contestado
                             </td>
                             <td>  
                                 <form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_reporte' reporte.pk %}">
@@ -116,7 +116,7 @@
         </div>
         <script>
             $(document).ready(function(){
-                //Mostrar el menú desplegable
+                //Mostrar el menú desplegable del botón Eliminar
                 $('[id^="btn-confirmar-eliminar"]').click(function(){
                     var divId = $(this).attr('id').split('-')[3];
                     $('#dropdown-confirmacion-' + divId).show();
@@ -125,9 +125,9 @@
                 $('[id^="btn-cancelar-eliminar"]').click(function(){
                     var divId2 = $(this).attr('id').split('-')[3];
                     $('#dropdown-confirmacion-' + divId2).hide();
-                    
-            
                 });
+
+
             }); 
         </script>
 

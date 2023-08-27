@@ -13,19 +13,22 @@ class Reportes(models.Model):
     ciudad = models.CharField("Ciudad", max_length=300, default="Ciudad de donde se genera el reporte...")
     cp = models.IntegerField("Código Postal", default=0)
     edad = models.IntegerField("Edad", default=0)
-    descripcion = models.CharField("Descripción", max_length=300, default="Escribe aquí la descripción del problema o solicitud...")
+    descripcion = models.TextField("Descripción", max_length=300, default="Escribe aquí la descripción del problema o solicitud...")
 
     def _str_(self):
         return self.titulo
     
+
+
+
     
-    '''
-    _str_  >>> Es un metodo especial en Django que se utiliza para representar una instancia de nuestro modelo 
-    como una cadena de texto legible, y no como un código alfanumérico que no nos ayude a identificar que tipo
-    de modelo o dato se trata.
+'''
+_str_  >>> Es un metodo especial en Django que se utiliza para representar una instancia de nuestro modelo 
+como una cadena de texto legible, y no como un código alfanumérico que no nos ayude a identificar que tipo
+de modelo o dato se trata.
 
-    '''
+'''
 
-    '''
-    En caso de intentar retornar algun dato alfanumérico hay que conovertirlo a string, por ejemplo...
-    '''
+'''
+En caso de intentar retornar algun dato alfanumérico hay que conovertirlo a string, por ejemplo...
+'''
